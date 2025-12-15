@@ -1,94 +1,123 @@
-import { SxProps, Theme } from '@mui/material'
 
-export const layoutBox: SxProps<Theme> = {
-  display: 'flex',
-  height: '100vh',
-  overflow: 'hidden',
-}
 
-export const leftSection: SxProps<Theme> = {
-  position: 'relative',
-  height: '100vh',
-  background: 'linear-gradient(180deg,#FFFFFF 0%,#F0F9FF 33.17%,#DFEDFD 67.79%,#F1E5FF 100%)',
-  overflow: 'hidden',
-  display: 'flex',
-  alignItems: 'start',
-  textAlign: 'left',
-  justifyContent: 'center',
-  flexDirection: 'column',
-}
+export const pageWrapperSx = {
+  minHeight: "100vh",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: "#C7E9F1",
+  padding: "20px",
+};
 
-export const textStyleBottom: SxProps<Theme> = {
-  maxWidth: '70%',
-  textAlign: 'left',
+export const cardSx = {
+  padding: "60px 50px",
+  borderRadius: "10px",
+  backgroundColor: "#FFFFFF",
+  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+};
+
+export const logoBoxSx = {
+  display: "flex",
+  justifyContent: "center",
+  marginBottom: "40px",
+};
+
+export const headerBoxSx = {
+  textAlign: "center",
+  marginBottom: "40px",
+};
+
+export const titleSx = {
+  color: "#0A0A0A",
+  fontSize: "24px",
+  fontWeight: 700,
+  marginBottom: "8px",
+};
+
+export const subtitleSx = {
+  color: "#636363",
+  fontSize: "14px",
+  lineHeight: "150%",
+};
+
+export const formSx = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "20px",
+};
+
+export const labelSx = {
+  fontSize: "14px",
+  fontWeight: 500,
+  marginBottom: "12px",
+};
+
+export const inputSx = {
+  "& .MuiOutlinedInput-root": {
+    backgroundColor: "#F6F5F5",
+    borderRadius: "9999px",
+    height: "56px",
+  },
+};
+
+export const helperTextSx = {
+  fontSize: "14px",
+  color: "#636363",
+  lineHeight: "150%",
+};
+
+export const checkboxRowSx = {
   marginTop: 2,
-}
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+};
 
-export const logoStyle: SxProps<Theme> = {
-  display: 'flex',
-  marginLeft: 5,
-  justifyContent: 'center',
-}
+export const forgotTextSx = {
+  fontSize: "14px",
+  color: "#6B7280",
+  textDecoration: "underline",
+  cursor: "pointer",
+};
 
-export const rightSection: SxProps<Theme> = {
-  background: '#FFFFFF',
-  overflow: 'hidden',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  alignContent: 'center',
-}
-
-export const dividerStyle: SxProps<Theme> = {
-  borderColor: 'lightgray',
-}
-
-export const textFieldStyle: SxProps<Theme> = {
-  '& fieldset': {
-    borderRadius: '210px',
+export const submitButtonSx = {
+  backgroundColor: "#4DB9C8",
+  color: "#FFFFFF",
+  height: "48px",
+  borderRadius: "9999px",
+  fontSize: "18px",
+  fontWeight: 600,
+  textTransform: "none",
+  boxShadow: "0 0 8px 0 #DDE6E8",
+  "&:hover": {
+    backgroundColor: "#3A9BA8",
   },
+};
 
-  '&:hover fieldset': {
-    borderColor: 'transparent',
-  },
+export const backButtonSx = {
+  marginTop: 1,
+  backgroundColor: "#E5E7EB",
+  color: "#000",
+  height: "48px",
+  borderRadius: "9999px",
+  fontWeight: 600,
+};
 
-  '&.Mui-focused fieldset': {
-    borderColor: 'transparent',
-  },
-  '& .MuiInputBase-input': {
-    paddingLeft: '8px',
-  },
-  width: 500,
-  height: 60,
-}
 
-export const loginButtonStyle = (isSubmit: boolean): SxProps<Theme> => ({
-  width: 500,
-  height: 60,
-  mt: isSubmit ? 10 : 3,
-  borderRadius: '30px',
-  py: 1.5,
-  backgroundColor: '#6967F6',
-  '&:hover': { backgroundColor: '#5b58e6' },
-})
+export const checkboxControlSx = {
+  padding: 0,
+  marginRight: "8px",
+};
 
-export const forgotPasswordStyle: SxProps<Theme> = {
-  cursor: 'pointer',
-  textDecoration: 'underline',
-}
+export const checkboxLabelTextSx = {
+  fontSize: "14px",
+  fontWeight: 500,
+  color: "#000",
+  display: "inline",
+};
 
-export const backButtonStyle: SxProps<Theme> = {
-  width: 500,
-  height: 60,
-  mt: 3,
-  borderRadius: '30px',
-  py: 1.5,
-  color: 'black',
-  backgroundColor: '#F2F2F2',
-  '&:hover': { backgroundColor: '#F2F2F2' },
-}
-
-export const textStyle: SxProps<Theme> = {
-  textAlign: 'center',
-  marginTop: 3,
-}
+export const checkboxLinkTextSx = {
+  textDecoration: "underline",
+  cursor: "pointer",
+  fontWeight: 500,
+};
