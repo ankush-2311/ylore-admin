@@ -51,7 +51,11 @@ const Sidenav = () => {
             >
               <ListItemIcon sx={sidebarStyles.listItemIcon}>
                 <Image
-                  src={active ? item.selectedLogo : item.logo}
+                  src={
+                    (active
+                      ? (item.selectedLogo ?? item.logo)
+                      : (item.logo ?? item.selectedLogo)) ?? ""
+                  }
                   alt={item.name}
                   width={20}
                   height={20}
