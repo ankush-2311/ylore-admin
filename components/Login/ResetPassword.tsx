@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import Image from "next/image";
+import { Formik } from "formik";
 
 import ylore from "../../public/assets/logo.svg";
 import eyeClosed from "../../public/assets/EyeClosed.svg";
@@ -35,16 +36,10 @@ import {
   checkboxLabelTextSx,
   checkboxLinkTextSx,
 } from "./loginStyle";
+import { validationSchema } from "./validationschema";
 
 const ResetPassword = () => {
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [termsAgreed, setTermsAgreed] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-  };
 
   return (
     <Box sx={pageWrapperSx}>
@@ -62,74 +57,121 @@ const ResetPassword = () => {
             </Typography>
           </Box>
 
-          <Box component="form" onSubmit={handleSubmit} sx={formSx}>
-            {/* New Password */}
-            <Box>
-              <Typography sx={labelSx}>New Password *</Typography>
-              <TextField
-                fullWidth
-                type={showPassword ? "text" : "password"}
-                placeholder="••••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                sx={inputSx}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton onClick={() => setShowPassword((p) => !p)}>
-                        <Image src={eyeClosed} alt="toggle" width={20} height={20} />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Box>
-
-            {/* Confirm Password */}
-            <Box>
-              <Typography sx={labelSx}>Confirm Password *</Typography>
-              <TextField
-                fullWidth
-                type={showPassword ? "text" : "password"}
-                placeholder="••••••••••"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                sx={inputSx}
-              />
-            </Box>
-
-            {/* Terms Checkbox */}
-            <Box sx={checkboxRowSx}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={termsAgreed}
-                    onChange={() => setTermsAgreed((k) => !k)}
-                    checkedIcon={
-                      <Image src={checkIcon} alt="checked" width={18} height={18} />
-                    }
-                    sx={checkboxControlSx}
+          <Formik
+            initialValues={{
+              password: "",
+              confirmPassword: "",
+              termsAgreed: false,
+            }}
+            validationSchema={validationSchema}
+            validateOnBlur
+            validateOnChange
+            onSubmit={(values) => {
+              console.log(values);
+            }}
+          >
+            {({ values, errors, touched, handleChange, handleSubmit }) => (
+              <Box component="form" onSubmit={handleSubmit} sx={formSx}>
+                {/* New Password */}
+                <Box>
+                  <Typography sx={labelSx}>New Password *</Typography>
+                  <TextField
+                    fullWidth
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="••••••••••"
+                    value={values.password}
+                    onChange={handleChange}
+                    sx={inputSx}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={() => setShowPassword((p) => !p)}
+                          >
+                            <Image
+                              src={eyeClosed}
+                              alt="toggle"
+                              width={20}
+                              height={20}
+                            />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
-                }
-                label={
-                  <Typography sx={checkboxLabelTextSx}>
-                    I agree to{" "}
-                    <Typography component="span" sx={checkboxLinkTextSx}>
-                      Terms of Service
-                    </Typography>{" "}
-                    &{" "}
-                    <Typography component="span" sx={checkboxLinkTextSx}>
-                      Privacy Policy
+                  {touched.password && errors.password && (
+                    <Typography color="error" fontSize="12px" mt={0.5}>
+                      {errors.password}
                     </Typography>
-                  </Typography>
-                }
-              />
-            </Box>
+                  )}
+                </Box>
 
-            <Button type="submit" fullWidth sx={submitButtonSx}>
-              Submit
-            </Button>
-          </Box>
+                {/* Confirm Password */}
+                <Box>
+                  <Typography sx={labelSx}>Confirm Password *</Typography>
+                  <TextField
+                    fullWidth
+                    name="confirmPassword"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="••••••••••"
+                    value={values.confirmPassword}
+                    onChange={handleChange}
+                    sx={inputSx}
+                  />
+                  {touched.confirmPassword && errors.confirmPassword && (
+                    <Typography color="error" fontSize="12px" mt={0.5}>
+                      {errors.confirmPassword}
+                    </Typography>
+                  )}
+                </Box>
+
+                {/* Terms */}
+                <Box sx={checkboxRowSx}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name="termsAgreed"
+                        checked={values.termsAgreed}
+                        onChange={handleChange}
+                        checkedIcon={
+                          <Image
+                            src={checkIcon}
+                            alt="checked"
+                            width={18}
+                            height={18}
+                          />
+                        }
+                        sx={checkboxControlSx}
+                      />
+                    }
+                    label={
+                      <Typography sx={checkboxLabelTextSx}>
+                        I agree to{" "}
+                        <Typography component="span" sx={checkboxLinkTextSx}>
+                          Terms of Service
+                        </Typography>{" "}
+                        &{" "}
+                        <Typography component="span" sx={checkboxLinkTextSx}>
+                          Privacy Policy
+                        </Typography>
+                      </Typography>
+                    }
+                  />
+                </Box>
+
+                {touched.termsAgreed && errors.termsAgreed && (
+                  <Typography color="error" fontSize="12px">
+                    {errors.termsAgreed}
+                  </Typography>
+                )}
+
+                <Button type="submit" fullWidth sx={submitButtonSx}>
+                  Submit
+                </Button>
+              </Box>
+            )}
+          </Formik>
         </Card>
       </Container>
     </Box>

@@ -1,5 +1,3 @@
-
-
 export const pageWrapperSx = {
   minHeight: "100vh",
   display: "flex",
@@ -102,7 +100,6 @@ export const backButtonSx = {
   borderRadius: "9999px",
   fontWeight: 600,
 };
-
 
 export const checkboxControlSx = {
   padding: 0,

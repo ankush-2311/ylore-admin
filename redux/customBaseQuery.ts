@@ -1,27 +1,32 @@
-import { fetchBaseQuery, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query'
-import type { BaseQueryFn } from '@reduxjs/toolkit/query'
-import { RootState } from './store'
-import { clearAuth, setCredentials } from './slices/authSlice'
+import {
+  fetchBaseQuery,
+  FetchArgs,
+  FetchBaseQueryError,
+} from "@reduxjs/toolkit/query";
+import type { BaseQueryFn } from "@reduxjs/toolkit/query";
+import { RootState } from "./store";
+import { clearAuth, setCredentials } from "./slices/authSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL,
   prepareHeaders: (headers, { getState }) => {
-    const token = (getState() as RootState).auth.token
+    const token = (getState() as RootState).auth.token;
     if (token) {
-      headers.set('Authorization', `Bearer ${token}`)
+      headers.set("Authorization", `Bearer ${token}`);
     }
-    return headers
+    return headers;
   },
-})
+});
 
 export const customBaseQuery: BaseQueryFn<
   string | FetchArgs,
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
-  let result = await baseQuery(args, api, extraOptions)
+  let result = await baseQuery(args, api, extraOptions);
   const statusCode =
-    (result as any)?.error?.originalStatus || (result as any)?.meta?.response?.status
+    (result as any)?.error?.originalStatus ||
+    (result as any)?.meta?.response?.status;
 
   // if (statusCode === 401) {
   //   const refreshToken = (api.getState() as RootState).auth.refreshToken
@@ -53,5 +58,5 @@ export const customBaseQuery: BaseQueryFn<
   //   }
   // }
 
-  return result
-}
+  return result;
+};

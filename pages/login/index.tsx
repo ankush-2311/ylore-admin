@@ -1,8 +1,8 @@
-import Login from '@/components/Login/Login'
-import React from 'react'
+import Login from "@/components/Login/Login";
+import React from "react";
 
 const index = () => {
-  return <Login />
-}
+  return <Login />;
+};
 
-export default index
+export default index;

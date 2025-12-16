@@ -1,3 +1,3 @@
 export interface CustomHeaderProps {
-  title: string
+  title: string;
 }
