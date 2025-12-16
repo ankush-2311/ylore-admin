@@ -36,7 +36,7 @@ import {
   checkboxLabelTextSx,
   checkboxLinkTextSx,
 } from "./loginStyle";
-import { validationSchema } from "./validationschema";
+import {  resetPasswordValidationSchema } from "./validationschema";
 
 const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -63,14 +63,15 @@ const ResetPassword = () => {
               confirmPassword: "",
               termsAgreed: false,
             }}
-            validationSchema={validationSchema}
+           
+            validationSchema={resetPasswordValidationSchema}
             validateOnBlur
             validateOnChange
             onSubmit={(values) => {
               console.log(values);
             }}
           >
-            {({ values, errors, touched, handleChange, handleSubmit }) => (
+            {({ values, errors, touched, handleChange, handleSubmit , handleBlur }) => (
               <Box component="form" onSubmit={handleSubmit} sx={formSx}>
                 {/* New Password */}
                 <Box>
@@ -81,6 +82,8 @@ const ResetPassword = () => {
                     type={showPassword ? "text" : "password"}
                     placeholder="••••••••••"
                     value={values.password}
+                     onBlur={handleBlur}
+                    
                     onChange={handleChange}
                     sx={inputSx}
                     InputProps={{
@@ -116,6 +119,7 @@ const ResetPassword = () => {
                     type={showPassword ? "text" : "password"}
                     placeholder="••••••••••"
                     value={values.confirmPassword}
+                     onBlur={handleBlur}
                     onChange={handleChange}
                     sx={inputSx}
                   />

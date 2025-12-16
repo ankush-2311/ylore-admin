@@ -43,7 +43,7 @@ import {
   forgotTextSx,
   submitButtonSx,
 } from "./loginStyle";
-import { validationSchema } from "./validationschema";
+import { getValidationSchema } from "./validationschema";
 
 const Login = () => {
   const [isForgetPassword, setIsForgetPassword] = useState(false);
@@ -83,7 +83,7 @@ const Login = () => {
 
           <Formik
             initialValues={{ email: "", password: "" }}
-            validationSchema={validationSchema}
+           validationSchema={getValidationSchema(isForgetPassword)}
             validateOnBlur
             validateOnChange
             onSubmit={async (values) => {
@@ -114,7 +114,7 @@ const Login = () => {
               }
             }}
           >
-            {({ values, errors, touched, handleChange, handleSubmit }) => (
+            {({ values, errors, touched, handleChange, handleSubmit , handleBlur}) => (
               <Box component="form" onSubmit={handleSubmit} sx={formSx}>
                 {/* Email */}
                 <Box>
@@ -126,6 +126,7 @@ const Login = () => {
                     name="email"
                     placeholder="Enter your Email"
                     value={values.email}
+                    onBlur={handleBlur}
                     onChange={handleChange}
                     sx={inputSx}
                   />
@@ -155,6 +156,7 @@ const Login = () => {
                       placeholder="••••••••••"
                       value={values.password}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                       sx={inputSx}
                       InputProps={{
                         endAdornment: (
