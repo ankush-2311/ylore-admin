@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import { Box } from '@mui/material'
-import UpdatePhoto from './UpdatePhoto'
-import ProfileDetail from './ProfileDetail'
-import UpdatePassword from './UpdatePassword/UpdatePassword'
-import CustomHeader from '@/commonComponents/Header/CustomHeader'
+import { Box } from "@mui/material";
+import UpdatePhoto from "./UpdatePhoto";
+import ProfileDetail from "./ProfileDetail";
+import UpdatePassword from "./UpdatePassword/UpdatePassword";
+import CustomHeader from "@/commonComponents/Header/CustomHeader";
 
 const UserProfile = () => {
   return (
-    <Box sx={{ padding: '0 1.7rem' }}>
+    <Box sx={{ padding: "0 1.7rem" }}>
       <CustomHeader title="User Profile" />
       <Box
         sx={{
@@ -17,27 +17,27 @@ const UserProfile = () => {
       >
         <Box
           sx={{
-            display: 'flex',
-            width: '100%',
-            justifyContent: 'space-between',
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
           }}
         >
           <Box
             sx={{
-              width: '23%',
+              width: "23%",
               mb: 5,
             }}
           >
             <UpdatePhoto />
           </Box>
-          <Box sx={{ width: '75%' }}>
+          <Box sx={{ width: "75%" }}>
             <ProfileDetail />
           </Box>
         </Box>
         <UpdatePassword />
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default UserProfile
+export default UserProfile;

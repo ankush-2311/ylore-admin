@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   Box,
@@ -8,221 +8,224 @@ import {
   InputAdornment,
   TextField,
   Typography,
-} from '@mui/material'
-import React, { useState } from 'react'
+  Container,
+  Card,
+  Checkbox,
+  FormControlLabel,
+} from "@mui/material";
+import React, { useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { Formik } from "formik";
+
+import { useDispatch } from "react-redux";
+
+import ylore from "../../public/assets/logo.svg";
+import eyeClosed from "../../public/assets/EyeClosed.svg";
+import checkIcon from "../../public/assets/Checkbox.svg";
+
+import { useLoginAdminMutation } from "@/redux/apis/authApi";
+import { setAuth } from "@/redux/slices/authSlice";
+import { showToast } from "@/redux/slices/toastSlice";
+
 import {
-  layoutBox,
-  leftSection,
-  logoStyle,
-  rightSection,
-  textStyleBottom,
-  textFieldStyle,
-  loginButtonStyle,
-  forgotPasswordStyle,
-  backButtonStyle,
-  textStyle,
-} from './loginStyle'
-import ylore from '../../public/assets/ylore.svg'
-import envelope from '../../public/assets/envelope.png'
-import key from '../../public/assets/key.png'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
-import { useLoginAdminMutation } from '@/redux/apis/authApi'
-import { useDispatch } from 'react-redux'
-import { setAuth } from '@/redux/slices/authSlice'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
-import { showToast } from '@/redux/slices/toastSlice'
+  pageWrapperSx,
+  cardSx,
+  logoBoxSx,
+  headerBoxSx,
+  titleSx,
+  subtitleSx,
+  formSx,
+  labelSx,
+  inputSx,
+  helperTextSx,
+  checkboxRowSx,
+  forgotTextSx,
+  submitButtonSx,
+} from "./loginStyle";
+import { getValidationSchema } from "./validationschema";
 
 const Login = () => {
-  const [isForgetPassword, setIsForgetPassword] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const dispatch = useDispatch()
-  const [loginAdmin, { isLoading }] = useLoginAdminMutation()
-  const { push } = useRouter()
+  const [isForgetPassword, setIsForgetPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [keepSignedIn, setKeepSignedIn] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-
-    if (!isForgetPassword) {
-      try {
-        const response = await loginAdmin({ email, password }).unwrap()
-
-        const { token, user } = response
-
-        dispatch(
-          setAuth({
-            token,
-            user,
-          }),
-        )
-        push('/dashboard')
-        dispatch(
-          showToast({
-            message: 'Login successful!',
-            severity: 'success',
-          }),
-        )
-      } catch (err) {
-        const error = err as { status?: number }
-        if (error?.status === 404) {
-          dispatch(showToast({ message: 'User not found', severity: 'error' }))
-          return
-        } else if (error?.status === 401) {
-          dispatch(showToast({ message: 'Invalid credentials', severity: 'error' }))
-          return
-        }
-        dispatch(showToast({ message: 'Login failed', severity: 'error' }))
-      }
-    } else {
-      // const response = await forgetPassword({ email });
-      // if (response?.data?.success) {
-      //   dispatch(
-      //     showToast({
-      //       message:
-      //         "A password reset link has been sent to your registered email.",
-      //       severity: "success",
-      //     })
-      //   );
-      // }
-    }
-  }
-  const isForgotLoading = false
+  const dispatch = useDispatch();
+  const [loginAdmin, { isLoading }] = useLoginAdminMutation();
+  const { push } = useRouter();
 
   return (
-    <div>
-      <Box sx={layoutBox}>
-        <Box flex={1.2} sx={leftSection}>
-          <Box marginLeft={8}>
-            <Typography fontFamily="Roboto" fontWeight={700} fontSize="48px">
-              Welcome to the Ylore portal
-            </Typography>
-            <Typography fontFamily="Roboto" fontWeight={400} fontSize="14px" sx={textStyleBottom}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut non iusto laudantium
-              nesciunt odit temporibus commodi provident. Voluptate nobis sit ea quidem veniam,
-              possimus magnam placeat veritatis consequatur, est doloribus!
-            </Typography>
+    <Box sx={pageWrapperSx}>
+      <Container maxWidth="sm">
+        <Card sx={cardSx}>
+          <Box sx={logoBoxSx}>
+            <Image src={ylore} alt="Ylore Logo" width={57} height={87} />
           </Box>
-        </Box>
 
-        <Box flex={1} sx={rightSection}>
-          <Box width="100%" maxWidth="500px">
-            <Box sx={logoStyle}>
-              <Image src={ylore} alt="logo" width={200} height={60} />
-            </Box>
-
-            <form style={{ marginTop: 40 }} onSubmit={handleSubmit}>
-              <TextField
-                margin="normal"
-                placeholder={isForgetPassword ? 'Enter your registered email' : 'Enter your Email'}
-                sx={textFieldStyle}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="end">
-                      <Image
-                        src={envelope}
-                        alt="icon"
-                        width={20}
-                        height={20}
-                        style={{ marginRight: 3 }}
-                      />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-
+          <Box sx={headerBoxSx}>
+            <Typography sx={titleSx}>
+              {isForgetPassword ? "Forgot Password" : "Sign in"}
+            </Typography>
+            <Typography sx={subtitleSx}>
               {isForgetPassword ? (
-                <Box sx={textStyle}>
-                  <Typography>
-                    Don&rsquo;t remember your registered email? Reach out to our support team for
-                    further assistance.
-                  </Typography>
-                </Box>
+                <>
+                  Secure password recovery <br />
+                  Enter your registered email to receive reset instructions.
+                </>
               ) : (
                 <>
-                  <TextField
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Enter your Password"
-                    margin="normal"
-                    sx={textFieldStyle}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="end">
-                          <Box display="flex" alignItems="center" pr={2}>
-                            <Image src={key} alt="icon" width={20} height={20} />
-                          </Box>
-                        </InputAdornment>
-                      ),
-                      endAdornment: (
-                        <InputAdornment position="start">
-                          <Box display="flex" alignItems="center" pr={0.5}>
-                            <IconButton onClick={() => setShowPassword((prev) => !prev)} edge="end">
-                              {showPassword ? <Visibility /> : <VisibilityOff />}
-                            </IconButton>
-                          </Box>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-
-                  <Box display="flex" justifyContent="end" mt={2}>
-                    <Typography
-                      fontFamily="Roboto"
-                      sx={forgotPasswordStyle}
-                      fontWeight={400}
-                      fontSize="16px"
-                      onClick={() => setIsForgetPassword(true)}
-                    >
-                      Forgot Password?
-                    </Typography>
-                  </Box>
+                  Welcome to the Admin Portal <br />
+                  Authenticate to manage content, users, and platform workflows
                 </>
               )}
-
-              <Button
-                type="submit"
-                variant="contained"
-                fullWidth
-                sx={loginButtonStyle(isForgetPassword)}
-              >
-                <Typography fontFamily="Roboto" fontWeight={700} fontSize="22px">
-                  {isForgetPassword ? (
-                    isForgotLoading ? (
-                      <CircularProgress size="40px" sx={{ color: '#ffffff' }} />
-                    ) : (
-                      'Submit'
-                    )
-                  ) : isLoading ? (
-                    <CircularProgress size="40px" sx={{ color: '#ffffff' }} />
-                  ) : (
-                    'Login'
-                  )}
-                </Typography>
-              </Button>
-
-              {isForgetPassword && (
-                <Button
-                  variant="contained"
-                  fullWidth
-                  sx={backButtonStyle}
-                  onClick={() => setIsForgetPassword(false)}
-                >
-                  <Typography fontFamily="Roboto" fontWeight={700} fontSize="22px">
-                    Back
-                  </Typography>
-                </Button>
-              )}
-            </form>
+            </Typography>
           </Box>
-        </Box>
-      </Box>
-    </div>
-  )
-}
 
-export default Login
+          <Formik
+            initialValues={{ email: "", password: "" }}
+           validationSchema={getValidationSchema(isForgetPassword)}
+            validateOnBlur
+            validateOnChange
+            onSubmit={async (values) => {
+              if (!isForgetPassword) {
+                try {
+                  const response = await loginAdmin({
+                    email: values.email,
+                    password: values.password,
+                  }).unwrap();
+
+                  dispatch(setAuth(response));
+                  push("/dashboard");
+
+                  dispatch(
+                    showToast({
+                      message: "Login successful!",
+                      severity: "success",
+                    }),
+                  );
+                } catch (err: any) {
+                  dispatch(
+                    showToast({
+                      message: "Login failed",
+                      severity: "error",
+                    }),
+                  );
+                }
+              }
+            }}
+          >
+            {({ values, errors, touched, handleChange, handleSubmit , handleBlur}) => (
+              <Box component="form" onSubmit={handleSubmit} sx={formSx}>
+                {/* Email */}
+                <Box>
+                  <Typography sx={labelSx}>
+                    Email <span style={{ color: "#AD0303" }}>*</span>
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    name="email"
+                    placeholder="Enter your Email"
+                    value={values.email}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    sx={inputSx}
+                  />
+                  {touched.email && errors.email && (
+                    <Typography color="error" fontSize="12px" mt={0.5}>
+                      {errors.email}
+                    </Typography>
+                  )}
+                </Box>
+
+                {isForgetPassword && (
+                  <Typography sx={helperTextSx}>
+                    Don’t remember your registered email? Reach out to our
+                    support team for further assistance.
+                  </Typography>
+                )}
+
+                {!isForgetPassword && (
+                  <Box>
+                    <Typography sx={labelSx}>
+                      Password <span style={{ color: "#AD0303" }}>*</span>
+                    </Typography>
+                    <TextField
+                      fullWidth
+                      name="password"
+                      type={showPassword ? "text" : "password"}
+                      placeholder="••••••••••"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      sx={inputSx}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton
+                              onClick={() => setShowPassword((p) => !p)}
+                            >
+                              <Image
+                                src={eyeClosed}
+                                alt="toggle"
+                                width={20}
+                                height={20}
+                              />
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    {touched.password && errors.password && (
+                      <Typography color="error" fontSize="12px" mt={0.5}>
+                        {errors.password}
+                      </Typography>
+                    )}
+
+                    <Box sx={checkboxRowSx}>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={keepSignedIn}
+                            onChange={() => setKeepSignedIn((k) => !k)}
+                            checkedIcon={
+                              <Image
+                                src={checkIcon}
+                                alt="checked"
+                                width={18}
+                                height={18}
+                              />
+                            }
+                          />
+                        }
+                        label="Keep me signed in"
+                      />
+
+                      <Typography
+                        sx={forgotTextSx}
+                        onClick={() => setIsForgetPassword(true)}
+                      >
+                        Forgot password?
+                      </Typography>
+                    </Box>
+                  </Box>
+                )}
+
+                <Button type="submit" fullWidth sx={submitButtonSx}>
+                  {isLoading ? (
+                    <CircularProgress size={28} sx={{ color: "#fff" }} />
+                  ) : isForgetPassword ? (
+                    "Submit"
+                  ) : (
+                    "Login"
+                  )}
+                </Button>
+              </Box>
+            )}
+          </Formik>
+        </Card>
+      </Container>
+    </Box>
+  );
+};
+
+export default Login;

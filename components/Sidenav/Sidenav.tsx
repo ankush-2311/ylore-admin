@@ -1,36 +1,44 @@
-'use client'
+"use client";
 
-import { Box, List, ListItemButton, ListItemIcon, ListItemText, Collapse } from '@mui/material'
-import Image from 'next/image'
-import Link from 'next/link'
-import { Fragment } from 'react'
-import { navMenu } from './sidenavData'
-import { sidebarStyles } from './sidenavStyle'
-import ylore from '../../public/assets/ylore.svg'
-import { NavItemTypes } from '@/utils/types/sidenavDataType'
-import { useRouter } from 'next/router'
+import {
+  Box,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Collapse,
+} from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
+import { Fragment } from "react";
+import { navMenu } from "./sidenavData";
+import { sidebarStyles } from "./sidenavStyle";
+import ylore from "../../public/assets/ylore.svg";
+import { NavItemTypes } from "@/utils/types/sidenavDataType";
+import { useRouter } from "next/router";
 
 const Sidenav = () => {
-  const router = useRouter()
-  const pathname = router.pathname
+  const router = useRouter();
+  const pathname = router.pathname;
 
   const isActive = (itemPath: string) => {
-    if (itemPath === '/') return pathname === '/'
+    if (itemPath === "/") return pathname === "/";
     return (
       pathname.startsWith(itemPath) ||
-      (itemPath.includes(':id') && pathname.startsWith('/escalation-task/escalations'))
-    )
-  }
+      (itemPath.includes(":id") &&
+        pathname.startsWith("/escalation-task/escalations"))
+    );
+  };
 
   const renderItems = (items: NavItemTypes[], depth = 0) =>
     items.map((item) => {
-      const active = isActive(item.path)
-      const hasChildren = !!item.children?.length
-      const firstChildPath = item.children?.[0]?.path ?? item.path
+      const active = isActive(item.path);
+      const hasChildren = !!item.children?.length;
+      const firstChildPath = item.children?.[0]?.path ?? item.path;
 
       return (
         <Fragment key={item.id}>
-          <Link href={firstChildPath} style={{ textDecoration: 'none' }}>
+          <Link href={firstChildPath} style={{ textDecoration: "none" }}>
             <ListItemButton
               sx={{
                 ...(active
@@ -53,15 +61,19 @@ const Sidenav = () => {
 
               <ListItemText
                 primary={item.name}
-                primaryTypographyProps={{ fontSize: '15px' }}
+                primaryTypographyProps={{ fontSize: "15px" }}
                 sx={sidebarStyles.listItemText}
               />
             </ListItemButton>
           </Link>
 
           {hasChildren && (
-            <Collapse in={pathname.startsWith(item.path)} timeout="auto" unmountOnExit>
-              <Box sx={{ display: 'flex', justifyContent: 'end' }}>
+            <Collapse
+              in={pathname.startsWith(item.path)}
+              timeout="auto"
+              unmountOnExit
+            >
+              <Box sx={{ display: "flex", justifyContent: "end" }}>
                 <List
                   disablePadding
                   sx={{
@@ -76,8 +88,8 @@ const Sidenav = () => {
             </Collapse>
           )}
         </Fragment>
-      )
-    })
+      );
+    });
 
   return (
     <Box sx={sidebarStyles.container}>
@@ -87,7 +99,7 @@ const Sidenav = () => {
 
       <List sx={{ mt: 1 }}>{renderItems(navMenu)}</List>
     </Box>
-  )
-}
+  );
+};
 
-export default Sidenav
+export default Sidenav;

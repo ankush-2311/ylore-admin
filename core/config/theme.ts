@@ -1,50 +1,55 @@
-import { createTheme } from '@mui/material/styles'
-import { Poppins } from 'next/font/google'
+import { createTheme } from "@mui/material/styles";
+import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-poppins',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-})
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-poppins",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 const theme = createTheme({
   palette: {
-    mode: 'light',
+    mode: "light",
     primary: {
-      main: '#6967F6',
+      main: "#6967F6",
     },
     secondary: {
-      main: '#000000',
+      main: "#000000",
     },
     background: {
-      default: '#f9fafb',
+      default: "#f9fafb",
     },
     common: {
-      white: '#FFFFFF',
+      white: "#FFFFFF",
     },
     text: {
-      primary: '#111827',
-      secondary: '#6b7280',
+      primary: "#111827",
+      secondary: "#6b7280",
     },
   },
   typography: {
-    fontFamily: ['sans-serif', 'Arial', 'Helvetica', poppins.style.fontFamily].join(','),
+    fontFamily: [
+      "sans-serif",
+      "Arial",
+      "Helvetica",
+      poppins.style.fontFamily,
+    ].join(","),
     h1: {
-      fontFamily: ['Poppins', 'sans-serif'].join(','),
-      fontSize: '1.875rem',
+      fontFamily: ["Poppins", "sans-serif"].join(","),
+      fontSize: "1.875rem",
       fontWeight: 700,
     },
     h2: {
-      fontFamily: ['Poppins', 'sans-serif'].join(','),
-      fontSize: '1.5rem',
+      fontFamily: ["Poppins", "sans-serif"].join(","),
+      fontSize: "1.5rem",
       fontWeight: 600,
     },
     body1: {
-      fontSize: '1rem',
+      fontSize: "1rem",
     },
     body2: {
-      fontSize: '0.875rem',
+      fontSize: "0.875rem",
     },
   },
   breakpoints: {
@@ -60,17 +65,17 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: '0.5rem',
-          textTransform: 'none',
+          borderRadius: "0.5rem",
+          textTransform: "none",
         },
       },
     },
     MuiContainer: {
       defaultProps: {
-        maxWidth: 'lg',
+        maxWidth: "lg",
       },
     },
   },
-})
+});
 
-export default theme
+export default theme;

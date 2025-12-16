@@ -1,20 +1,20 @@
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/redux/store'
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 const Index = () => {
-  const router = useRouter()
-  const { token } = useSelector((state: RootState) => state.auth)
+  const router = useRouter();
+  const { token } = useSelector((state: RootState) => state.auth);
   useEffect(() => {
     if (token) {
-      router.replace('/dashboard')
+      router.replace("/dashboard");
     } else {
-      router.replace('/login')
+      router.replace("/login");
     }
-  }, [token, router])
+  }, [token, router]);
 
-  return null
-}
+  return null;
+};
 
-export default Index
+export default Index;

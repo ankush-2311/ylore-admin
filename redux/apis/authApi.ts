@@ -1,21 +1,22 @@
-import { createApi } from '@reduxjs/toolkit/query/react'
-import { customBaseQuery } from '../customBaseQuery'
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { customBaseQuery } from "../customBaseQuery";
 
 export const authApi = createApi({
-  reducerPath: 'authApi',
+  reducerPath: "authApi",
   baseQuery: customBaseQuery,
-  tagTypes: ['Auth'],
+  tagTypes: ["Auth"],
   endpoints: (builder) => ({
-    loginAdmin: builder.mutation<{ token: string; user: any }, { email: string; password: string }>(
-      {
-        query: (body) => ({
-          url: '/admin-users/login',
-          method: 'POST',
-          body,
-        }),
-      },
-    ),
+    loginAdmin: builder.mutation<
+      { token: string; user: any },
+      { email: string; password: string }
+    >({
+      query: (body) => ({
+        url: "/admin-users/login",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
-})
+});
 
-export const { useLoginAdminMutation } = authApi
+export const { useLoginAdminMutation } = authApi;
