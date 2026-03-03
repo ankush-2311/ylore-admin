@@ -2,9 +2,10 @@
 
 import { Box } from "@mui/material";
 import UpdatePhoto from "./UpdatePhoto";
-import ProfileDetail from "./ProfileDetail";
-import UpdatePassword from "./UpdatePassword/UpdatePassword";
+
 import CustomHeader from "@/commonComponents/Header/CustomHeader";
+import { ProfileDetailsForm } from "./ProfileDetailForm";
+import { UpdatePasswordForm } from "./UpdatePassowordForm";
 
 const UserProfile = () => {
   return (
@@ -15,26 +16,34 @@ const UserProfile = () => {
           mt: 3,
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            width: "100%",
-            justifyContent: "space-between",
-          }}
-        >
-          <Box
-            sx={{
-              width: "23%",
-              mb: 5,
-            }}
-          >
-            <UpdatePhoto />
-          </Box>
-          <Box sx={{ width: "75%" }}>
-            <ProfileDetail />
-          </Box>
-        </Box>
-        <UpdatePassword />
+  <Box
+  sx={{
+    display: "flex",
+    width: "100%",
+    gap: "16px",         
+    alignItems: "stretch",
+  }}
+>
+  {/* LEFT: IMAGE */}
+  <Box
+    sx={{
+      flex: "0 0 25%",
+    }}
+  >
+    <UpdatePhoto />
+  </Box>
+
+  {/* RIGHT: FORM */}
+  <Box
+    sx={{
+      flex: "1 1 auto",
+    }}
+  >
+    <ProfileDetailsForm />
+  </Box>
+</Box>
+
+        <UpdatePasswordForm />
       </Box>
     </Box>
   );

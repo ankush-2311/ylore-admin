@@ -13,7 +13,7 @@ import Link from "next/link";
 import { Fragment } from "react";
 import { navMenu } from "./sidenavData";
 import { sidebarStyles } from "./sidenavStyle";
-import ylore from "../../public/assets/ylore.svg";
+import ylore from "@/public/sidenav/logo.svg";
 import { NavItemTypes } from "@/utils/types/sidenavDataType";
 import { useRouter } from "next/router";
 
@@ -39,16 +39,17 @@ const Sidenav = () => {
       return (
         <Fragment key={item.id}>
           <Link href={firstChildPath} style={{ textDecoration: "none" }}>
-            <ListItemButton
-              sx={{
-                ...(active
-                  ? item.hasSubRoute
-                    ? sidebarStyles.subRouteButtonHover
-                    : sidebarStyles.listItemButtonHover
-                  : sidebarStyles.listItemButton),
-                pl: 2 + depth * 2,
-              }}
-            >
+           <ListItemButton
+  sx={{
+    ...(active
+      ? item.isSubRoute
+        ? sidebarStyles.subRouteActive     
+        : sidebarStyles.listItemActive     
+      : sidebarStyles.listItemButton),          
+    pl: 2 + depth * 2,
+  }}
+>
+
               <ListItemIcon sx={sidebarStyles.listItemIcon}>
                 <Image
                   src={

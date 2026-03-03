@@ -6,7 +6,7 @@ export const sidebarStyles = {
     height: "100vh",
     width: 295,
     background:
-      "linear-gradient(180deg, #FFFFFF 0%, #F0F9FF 33.17%, #DFEDFD 67.79%, #F1E5FF 100%)",
+      "#FFFFFF",
     boxShadow: 3,
 
     zIndex: 1200,
@@ -39,31 +39,61 @@ export const sidebarStyles = {
     mx: 1,
     borderRadius: 2,
   },
-  listItemButtonHover: {
-    my: 0.5,
-    mx: 1,
-    borderRadius: 2,
-    backgroundColor: "#5b58e6",
+  /* MAIN ROUTE — ACTIVE (with or without sub routes) */
+listItemActive: {
+  my: 0.5,
+  mx: 1,
+  borderRadius: 2,
+  backgroundColor: "#0FCCE6", // ✅ main active color
+  "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
+    color: "#fff",
+  },
+  "&:hover": {
+    backgroundColor: "#0FCCE6",
+  },
+},
+
+/* MAIN ROUTE — DEFAULT */
+listItemDefault: {
+  my: 0.5,
+  mx: 1,
+  borderRadius: 2,
+  "&:hover": {
+    backgroundColor: "#0FCCE6", // ✅ hover color for all
     "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
       color: "#fff",
     },
-    "&:hover": {
-      backgroundColor: "#5b58e6",
-      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
-        color: "#fff",
-      },
+  },
+},
+
+/* SUB ROUTE — ACTIVE */
+subRouteActive: {
+  mx: 1,
+  borderRadius: 2,
+  backgroundColor: "#D1F5FA", // ✅ subroute active color
+  "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
+    color: "#1A1A1A",
+  },
+  "&:hover": {
+    backgroundColor: "#0FCCE6", // hover still main color
+    "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
+      color: "#fff",
     },
   },
-  subRouteButtonHover: {
-    mx: 1,
-    borderRadius: 2,
-    backgroundColor: "#D4D4FF",
-    "& .MuiListItemIcon-root, & .MuiListItemText-primary": {},
-    "&:hover": {
-      backgroundColor: "#D4D4FF",
-      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {},
+},
+
+/* SUB ROUTE — DEFAULT */
+subRouteDefault: {
+  mx: 1,
+  borderRadius: 2,
+  "&:hover": {
+    backgroundColor: "#0FCCE6",
+    "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
+      color: "#fff",
     },
   },
+},
+
   sublistItemButton: {
     my: 1,
     mx: 1,

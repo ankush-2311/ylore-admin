@@ -51,6 +51,16 @@ export const navMenu: NavItemTypes[] = [
   },
   {
     id: 3,
+    name: "Admin Management",
+    path: "/admin-management",
+    logo: UserManagementIcon,
+    selectedLogo: selectedUserManagementIcon,
+    isSubRoute: false,
+    hasSubRoute: false,
+  },
+
+  {
+    id: 4,
     name: "Creators Management",
     path: "/creators-management",
     logo: CreatorsManagementIcon,
@@ -59,65 +69,54 @@ export const navMenu: NavItemTypes[] = [
     hasSubRoute: false,
   },
   {
-    id: 4,
-    name: "Travel Management",
-    path: "/travel-management",
+    id: 5,
+    name: "Content Management",
+    path: "/content-management",
     logo: TravelManagementIcon,
     selectedLogo: selectedTravelManagementIcon,
     isSubRoute: false,
     hasSubRoute: true,
     children: [
       {
-        id: "4-1",
+        id: "5-1",
         name: "Places",
-        path: "/travel-management/places",
+        path: "/content-management/places",
         logo: PlacesIcon,
 
         isSubRoute: true,
         hasSubRoute: false,
       },
       {
-        id: "4-2",
-        name: "Tours & Packages",
-        path: "/travel-management/tours-and-packages",
+        id: "5-2",
+        name: "Tours",
+        path: "/content-management/tours",
         logo: ToursPackagesIcon,
 
         isSubRoute: true,
         hasSubRoute: false,
       },
       {
-        id: "4-2",
-        name: "Hubs",
-        path: "/travel-management/hubs",
+        id: "5-3",
+        name: "Mistory",
+        path: "/content-management/mistory",
         logo: ToursPackagesIcon,
 
         isSubRoute: true,
         hasSubRoute: false,
       },
-    ],
-  },
-  {
-    id: 5,
-    name: "Community Content",
-    path: "/community-content",
-    logo: CommunityContentIcon,
-    selectedLogo: selectedCommunityContentIcon,
-    isSubRoute: false,
-    hasSubRoute: true,
-    children: [
-      {
-        id: "5-1",
-        name: "Stories & Posts",
-        path: "/community-content/stories-and-posts",
+       {
+        id: "5-4",
+        name: "Hub",
+        path: "/content-management/hubs",
         logo: StoriesPostsIcon,
 
         isSubRoute: true,
         hasSubRoute: false,
       },
       {
-        id: "5-2",
+        id: "5-",
         name: "Creators Wall",
-        path: "/community-content/creators-wall",
+        path: "/content-management/creators-wall",
         logo: CreatorsWallIcon,
 
         isSubRoute: true,
@@ -127,6 +126,16 @@ export const navMenu: NavItemTypes[] = [
   },
   {
     id: 6,
+    name: "Creator Studio",
+    path: "/creator-studio",
+    logo: CommunityContentIcon,
+    selectedLogo: selectedCommunityContentIcon,
+    isSubRoute: false,
+    hasSubRoute: false,
+   
+  },
+  {
+    id: 7,
     name: "Booking & Orders",
     path: "/booking-and-orders",
     logo: BookingOrdersIcon,
@@ -135,7 +144,7 @@ export const navMenu: NavItemTypes[] = [
     hasSubRoute: false,
   },
   {
-    id: 7,
+    id: 8,
     name: "Finance",
     path: "/finance",
     logo: FinanceIcon,
@@ -144,31 +153,32 @@ export const navMenu: NavItemTypes[] = [
     hasSubRoute: true,
     children: [
       {
-        id: "7-1",
+        id: "8-1",
         name: "Sales Overview",
         path: "/finance/sales-overview",
         logo: SalesOverviewIcon,
         isSubRoute: true,
         hasSubRoute: false,
       },
+    
       {
-        id: "7-2",
-        name: "Distribution",
-        path: "/finance/distribution",
-        logo: DistributionIcon,
-        isSubRoute: true,
-        hasSubRoute: false,
-      },
-      {
-        id: "7-3",
+        id: "8-2",
         name: "Payment Gateway",
         path: "/finance/payment-gateway",
         logo: PaymentGatewayIcon,
         isSubRoute: true,
         hasSubRoute: false,
       },
+       {
+        id: "8-3",
+        name: "Commission",
+        path: "/finance/commission",
+        logo: PaymentGatewayIcon,
+        isSubRoute: true,
+        hasSubRoute: false,
+      },
       {
-        id: "7-4",
+        id: "8-4",
         name: "Financial Reports",
         path: "/finance/financial-reports",
         logo: FinancialReportsIcon,
@@ -177,15 +187,7 @@ export const navMenu: NavItemTypes[] = [
       },
     ],
   },
-  {
-    id: 8,
-    name: "Analytics & Reports",
-    path: "/analytics-and-reports",
-    logo: AnalyticsReportsIcon,
-    selectedLogo: selectedAnalyticsReportsIcon,
-    isSubRoute: false,
-    hasSubRoute: false,
-  },
+  
   {
     id: 9,
     name: "Communications",
@@ -219,24 +221,7 @@ export const navMenu: NavItemTypes[] = [
         isSubRoute: true,
         hasSubRoute: false,
       },
-       {
-        id: "9-4",
-        name: "Campaigns",
-        path: "/communications/campaigns",
-        logo: PaymentGatewayIcon,
-        isSubRoute: true,
-        hasSubRoute: false,
-      },
     ]
-  },
-  {
-    id: 10,
-    name: "Admin Settings",
-    path: "/admin-settings",
-    logo: AdminSettingsIcon,
-    selectedLogo: selectedAdminSettingsIcon,
-    isSubRoute: false,
-    hasSubRoute: false,
   },
 ];
 
