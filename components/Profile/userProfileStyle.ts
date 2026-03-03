@@ -137,5 +137,22 @@ export const styles = {
       px: 5,
       borderRadius: "8px",
     },
+    
   },
+  
+};
+
+
+export const primaryBtn = {
+  backgroundColor: "#0FCCE6",
+  borderRadius: "10px",
+  fontColor: "#FFFFFF",
+  
+};
+
+export const secondaryBtn = {
+  backgroundColor: "#D1F5FA",
+  borderRadius: "10px",
+  
+  fontColor: "#214F56",
 };

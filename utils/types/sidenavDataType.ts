@@ -14,7 +14,7 @@ export interface NavItemTypes {
   name: string;
   path: string;
   logo: StaticImageData;
-  selectedLogo: StaticImageData;
+  selectedLogo?: StaticImageData;
   hasSubRoute: boolean;
   isSubRoute: boolean;
   children?: subNavItemTypes[];
@@ -25,7 +25,7 @@ interface subNavItemTypes {
   name: string;
   path: string;
   logo: StaticImageData;
-  selectedLogo: StaticImageData;
+
   isSubRoute: boolean;
   hasSubRoute: boolean;
 }
